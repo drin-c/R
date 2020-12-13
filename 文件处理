@@ -1,0 +1,21 @@
+#读取多个文件
+  rm(list=ls())
+  #读入current数据
+  a1=list.files("H:/test/current")#列出路径下的所有文件名
+  dir=paste("H:/test/current/",a1,sep="")#将文件名和路径粘贴
+  n=length(dir)
+  library(ncdf4)
+  c<-nc_open(dir[1])
+  for(i in 2:n){
+    cnew<-nc_open(dir[i])
+    c=rbind(c,cnew)
+  }
+
+#nc文件的处理
+  names(c$var)#输出文件中的变量名
+  print(c) #[lon,lat,time]#查看所选变量属性
+  
+  
+  
+#找包
+  findPackage("quantile and mapping",display="browser") 找同时出现quantile和mapping的包并在网页上显示出来
