@@ -15,7 +15,26 @@
   names(c$var)#输出文件中的变量名
   print(c) #[lon,lat,time]#查看所选变量属性
   
+  #读取nc文件
+    ncvar_get(nc, varid=NA, start=NA, count=NA, verbose=FALSE, signedbyte=TRUE, collapse_degen=TRUE)
+      nc-添加操作的数据集，varid-添加操作的变量，start-写入位置，count-写入的数目
   
-  
+  #输出成nc文件
+    1.创建新nc变量
+      ncdim_def( name, units, vals, unlim=FALSE, create_dimvar=TRUE, calendar=NA, longname=name )
+        name-变量名，units-维度单位，val-维度值
+        
+    2.创建nc文件
+      nc_create( filename, vars, force_v4=FALSE, verbose=FALSE )
+        filename文件名，vars变量（由ncdim_def创建）
+
+    3.给新建nc文件添加数据
+      ncvar_put( nc, varid, vals, start=NA, count=NA, verbose=FALSE )
+        nc-添加操作的nc数据集，varid-添加操作的变量，vals-数据值，start-写入位置，count-写入的数目
+        
+    4.给已存在的nc文件添加新变量
+      ncvar_add( nc, v, verbose=FALSE, indefine=FALSE )
+        nc-添加操作的nc文件，v表示新添加的变量（添加之后进行赋值）
 #找包
   findPackage("quantile and mapping",display="browser") 找同时出现quantile和mapping的包并在网页上显示出来
+
